@@ -1,7 +1,13 @@
 function geolocate() {
 
     const successCallback = (position) => {
-        console.log(position);
+        console.log("POSIÇÂO");
+        var latitude = position.coords.latitude;
+        var longitude = position.coords.longitude;
+        document.getElementById('x').innerHTML = latitude
+        document.getElementById('y').innerHTML = longitude
+
+
     }
 
     
