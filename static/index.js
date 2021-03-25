@@ -4,8 +4,8 @@ function geolocate() {
         console.log("POSIÇÂO");
         var latitude = position.coords.latitude;
         var longitude = position.coords.longitude;
-        document.getElementById('x').innerHTML = latitude
-        document.getElementById('y').innerHTML = longitude
+        document.getElementById('x').value = latitude
+        document.getElementById('y').value = longitude
 
 
     }

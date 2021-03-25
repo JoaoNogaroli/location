@@ -12,7 +12,12 @@
     <p>Teste1</p>
     <input type="button" value='pegar' onclick="geolocate()">
     <h3>Sua localização:</h3>
-    <h4>X: </h4><h5 id="x"></h4>
-    <h4>Y: </h4><h5 id="y"></h4>
+    <form action='/enviar' method="POST">
+        <h4>X: </h4><input type="text" name="x" id="x">
+        <h4>Y: </h4><input type="text" name="y" id="y">
+        <input type="submit" value="Enviar dados para gráfico">
+    </form>
+    
+
 </body>
 </html>
