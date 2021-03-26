@@ -24,6 +24,13 @@ port = int(os.environ.get("PORT", 5000))
 def index():
     return render_template('index.html')
 
+@app.route("/no_user", methods = ['POST'])   
+def no_user():
+    return render_template('no_user.html')
+
+@app.route("/pag_index" , methods = ['POST'])
+def pag_index():
+    return render_template('user.html')
 
 @app.route("/enviar", methods=['POST'])
 def visualize():
