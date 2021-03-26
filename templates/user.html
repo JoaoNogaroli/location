@@ -4,9 +4,29 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-auth.js"></script>
+
+
     <title>Logado</title>
 </head>
 <body>
-    <h1>LoGADO</h1>
+    
+    <h2>Cadastre-se</h2>
+    <form action="/pag_cad" method="POST">
+        <input type="submit" id="pag_cadastro" value="Ir para Página de Cadastro">
+    </form> 
+    <hr>
+    <h1>{{ email }}</h2>
+    <h21>Efetue seu Login</h2>
+    <input type="text" name="email" id="email">
+    <input type="text" name="senha" id="senha">
+    <input type="submit" value="Logar" onclick="cad()">
+
+
+    <script src="/static/user.js"></script>
+
 </body>
 </html>

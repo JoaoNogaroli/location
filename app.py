@@ -2,6 +2,7 @@ from flask import Flask, request, render_template
 import os
 import folium
 import pyrebase
+from cadastro_restaurante import func_cadastrar_restaurante
 
 config = {
     "apiKey": "AIzaSyAQwcftJBr3l60CLrKkRS1CjbMS6gom-nI",
@@ -32,6 +33,23 @@ def no_user():
 def pag_index():
     return render_template('user.html')
 
+@app.route("/pag_cad", methods=['POST'])
+def pag_cad():
+    return render_template('pag_cad.html')
+
+@app.route("/realizar_cadastro", methods=['POST'])
+def realizar_cadastro():
+    email = request.form['email']
+    senha = request.form['senha']
+    try:
+        func_cadastrar_restaurante(email, senha)
+        fim = "Cadastrado com sucesso!  " + email
+        return render_template('user.html', email=fim)
+    except:
+        fim = "Email já cadastrado"
+        return render_template('pag_cad.html', fim=fim)
+
+
 @app.route("/enviar", methods=['POST'])
 def visualize():
     x = request.form['x']
@@ -41,18 +59,26 @@ def visualize():
         zoom_start=42
     )
     
-    snapshots = list(db.child("DadosGeograficos").get().val())
-    for snapshot in snapshots:
-        valor = db.child("DadosGeograficos").child(snapshot).get().val()
-        latitude = valor['Latitude']
-        longitude = valor['Longitude']
-        #print(valor['Latitude'])
-    
-        folium.Marker(
-            location=[latitude, longitude],
-            popup="<b>Assalto Aqui!<b>",
-            tooltip="Clique Aqui!"
-        ).add_to(map)
+    snapshots1 = list(db.child("Users").child("DadosGeograficos").get().val())
+    for snapshots in snapshots1:
+        
+            valor = db.child("Users").child("DadosGeograficos").child(snapshots).get().val()
+            #latitude = valor['Latitude']
+            #longitude = valor['Longitude']
+            for item in valor:
+                try:
+                    aqui = db.child("Users").child("DadosGeograficos").child(snapshots).child(item).get().val()    
+                    latitude = aqui['Latitude']
+                    longitude = aqui['Longitude']
+                    print()
+                    folium.Marker(
+                        location=[latitude, longitude],
+                        popup="<b>Assalto Aqui!<b>",
+                        tooltip="Clique Aqui!"
+                    ).add_to(map)
+                except:
+                    continue
+            
     
     return map._repr_html_()
 

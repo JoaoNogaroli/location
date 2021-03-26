@@ -12,20 +12,6 @@ firebase.initializeApp(firebaseConfig);
 firebase.analytics();
 var data = firebase.database();
 
-var email =  document.getElementById("email").val();
-var password = document.getElementById("password").val();
-firebase.auth().createUserWithEmailAndPassword(email, password)
-  .then((user) => {
-    // Signed in
-    // ...
-  })
-  .catch((error) => {
-    var errorCode = error.code;
-    var errorMessage = error.message;
-    // ..
-  });
-
-
 
 function geolocate() {
 
@@ -37,17 +23,19 @@ function geolocate() {
         document.getElementById('y').value = longitude;
         const currentTime = new Date();
         const time = currentTime.getTime();
-        data.ref("DadosGeograficos").child("Solicitacao"+time).set({
+        data.ref("Users").child("DadosGeograficos").child("UnknownUser").child("Solicitação"+time).set({
             'Latitude': latitude,
             'Longitude': longitude,
             'timestamp': time
         })
-        data.ref("DadosGeograficos").on('value', function(snapshot){
+        data.ref("Users").child("DadosGeograficos").on('value', function(snapshot){
             snapshot.forEach(function(data){
-                console.log(data.val().Latitude)
-                console.log(data.val().Longitude)
+                console.log(data.val())
+                data.forEach(function(snapshot){
+                    console.log(snapshot.val().Latitude)
+                    console.log(snapshot.val().Longitude)
 
-                
+                }) 
             })
         })
 
