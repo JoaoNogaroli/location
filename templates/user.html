@@ -20,11 +20,13 @@
     </form> 
     <hr>
     <h1>{{ email }}</h2>
-    <h21>Efetue seu Login</h2>
-    <input type="text" name="email" id="email">
-    <input type="text" name="senha" id="senha">
-    <input type="submit" value="Logar" onclick="cad()">
-
+    <h2>Efetue seu Login</h2>
+    <h3>{{error}}</h3>
+    <!--<form action="/realizar_login", method="POST">-->
+        <input type="text" name="email" id="email">
+        <input type="text" name="senha" id="senha">
+        <input type="submit" value="Logar" onclick="logar()">
+    <!--</form>-->
 
     <script src="/static/user.js"></script>
 
