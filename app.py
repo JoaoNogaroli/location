@@ -68,7 +68,7 @@ def visualize():
     y = request.form['y']
     map = folium.Map(
         location=[x,y],
-        zoom_start=55
+        zoom_start=90
 
     )
     
@@ -104,7 +104,7 @@ def visualize():
                             popup="<b>"+alerta+"!"+"<b>",
                             icon=folium.Icon(
                                 color=cor,
-                                icon='glyphicon glyphicon-warning-sign'
+                                icon=' glyphicon-screenshot'
                             ),
                             tooltip="Clique Aqui!"
                         ).add_to(map)

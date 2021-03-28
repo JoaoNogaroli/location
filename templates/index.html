@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+
     <link rel="stylesheet" href="\static\index.css">
     <title>Escolha</title>
 </head>
@@ -11,16 +13,17 @@
     <div>
         <section class="esquerda">
             <form action="/no_user" method="POST">
-                <input type="submit" value="Enviar dados de Forma Anônima!" onclick="no_user()">
+                <input type="submit" id="este" value="Enviar dados de Forma Anônima!" onclick="no_user()">
             </form>
-       
+        
+            <br><br>
+        
             <form action="/pag_index" method="POST">
-                <input type="submit" value="Cadastre-se e envie dados!" onclick="index()">
+                <input type="submit" id="esse" value="Cadastre-se e envie dados!" onclick="index()">
             </form>
         </section>
-
     
     </div>
-
+    <script src="/static/index.js"></script>
 </body>
 </html>
