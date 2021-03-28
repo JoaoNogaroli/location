@@ -83,12 +83,31 @@ def visualize():
                     aqui = db.child("Users").child("DadosGeograficos").child(snapshots).child(item).get().val()    
                     latitude = aqui['Latitude']
                     longitude = aqui['Longitude']
-                    print()
-                    folium.Marker(
-                        location=[latitude, longitude],
-                        popup="<b>Assalto Aqui!<b>",
-                        tooltip="Clique Aqui!"
-                    ).add_to(map)
+                    alerta = aqui['Alerta'].capitalize()
+                    if alerta=="Assalto":
+                        cor='red'
+                        folium.Marker(
+                            
+                            location=[latitude, longitude],
+                            popup="<b>"+alerta+"!"+"<b>",
+                            icon=folium.Icon(
+                                color=cor,
+                                icon='glyphicon glyphicon-warning-sign'
+                            ),
+                            tooltip="Clique Aqui!"
+                        ).add_to(map)
+                    elif alerta=="Acidente":
+                        cor='blue'
+                        folium.Marker(
+                            
+                            location=[latitude, longitude],
+                            popup="<b>"+alerta+"!"+"<b>",
+                            icon=folium.Icon(
+                                color=cor,
+                                icon='glyphicon glyphicon-warning-sign'
+                            ),
+                            tooltip="Clique Aqui!"
+                        ).add_to(map)
                 except:
                     continue
             

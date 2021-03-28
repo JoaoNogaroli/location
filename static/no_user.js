@@ -13,6 +13,7 @@ firebase.analytics();
 var data = firebase.database();
 
 
+
 function geolocate() {
 
     const successCallback = (position) => {
@@ -23,9 +24,12 @@ function geolocate() {
         document.getElementById('y').value = longitude;
         const currentTime = new Date();
         const time = currentTime.getTime();
+        var opcao = document.getElementById('opcao').value
+        console.log("Tipo: " + opcao );
         data.ref("Users").child("DadosGeograficos").child("UnknownUser").child("Solicitação"+time).set({
             'Latitude': latitude,
             'Longitude': longitude,
+            'Alerta': opcao,
             'timestamp': time
         })
         data.ref("Users").child("DadosGeograficos").on('value', function(snapshot){

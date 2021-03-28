@@ -9,24 +9,33 @@
     <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-database.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-auth.js"></script>
     <script src="/static/app.js"></script>
+    <link rel="stylesheet" href="/static/alerta.css">
 
     <title>Envie dados estando logado!</title>
 </head>
 <body>
-    <h1> Teste geolocation</h1>
+    <h1> Teste geolocation</h1> <input class="deslogar" type="button" value="Deslogar" onclick="deslogar()">
     <h2 id="usuario"></h2>
-    <p>Teste1</p>
-    <input type="button" value='pegar' onclick="geolocate()">
+
+    <p>Escolha o tipo de Alerta!</p>
+    <select id="opcao" class="opcao">
+        <option value='assalto'>Assalto</option>
+        <option value='acidente'>Acidente</option>
+       
+    </select>
+    <br> <br>
+    <input type="button" class="alerta" value='Clique aqui para enviar o Alerta com sua localização!' onclick="geolocate()">
+    <hr>
     <h3>Sua localização:</h3>
     <form action='/enviar' method="POST">
-        <h4>X: </h4><input type="text" name="x" id="x">
-        <h4>Y: </h4><input type="text" name="y" id="y"><br><br><br>
-        <input type="submit" value="Enviar dados de forma anônima" style="height: 70px;border:1px solid ; border-radius: 5px; background-color: black; color: white;"><br><br>
+        <h4>Latitude Identificada: </h4><input type="text" name="x" id="x"  readonly="readonly" >
+        <h4>Longitude Identificada: </h4><input type="text" name="y" id="y"  readonly="readonly" ><br><br><br>
+        <input type="submit" value="Visualizar todos os Alertas!" style="height: 70px;border:1px solid ; border-radius: 5px; background-color: black; color: white;"><br><br>
         <!--<input type="submit" value="Enviar dados estando Logado" style="border:1px solid ; border-radius: 5px; background-color: blue; color: white;">-->
     </form>
 
     <br><br><br>
-    <input type="button" value="Deslogar" onclick="deslogar()">
+    
     <script src="/static/user_logged.js"></script>
 
 </body>

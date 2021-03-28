@@ -47,11 +47,13 @@ function geolocate() {
                 var user_id = firebase.auth().currentUser.uid;
                 console.log("Usuario email:" +  email_user);
                 console.log("Usuario ID:" +  user_id);
-        
+                var opcao = document.getElementById('opcao').value
+                console.log("Tipo: " + opcao );
                 document.getElementById("usuario").innerHTML = "EMAIL LOGADO: " + email_user;
                 database.ref("Users").child("DadosGeograficos").child(user_id).child("Solicitação"+time).set({
                     'Latitude': latitude,
                     'Longitude': longitude,
+                    'Alerta': opcao,
                     'timestamp': time
                 })
                 database.ref("Users").child("DadosGeograficos").on('value', function(snapshot){
