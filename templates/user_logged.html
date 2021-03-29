@@ -8,31 +8,76 @@
     <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-analytics.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-database.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-auth.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDr_NfJn5NyuJTKFy4e02HkcYRwdGFctxU"></script>    
+
     <script src="/static/app.js"></script>
     <link rel="stylesheet" href="/static/alerta.css">
 
     <title>Envie dados estando logado!</title>
 </head>
 <body>
-    <h1> Teste geolocation</h1> <input class="deslogar" type="button" value="Deslogar" onclick="deslogar()">
+    <div class="up">
+        <h1>Alerta Agora!</h1>
+        <input class="deslogar" type="button" value="Deslogar" onclick="deslogar()">
+    </div>
     <h2 id="usuario"></h2>
 
-    <p>Escolha o tipo de Alerta!</p>
+
+    <h3>Escolha o tipo de Alerta!</h3><br>
     <select id="opcao" class="opcao">
         <option value='assalto'>Assalto</option>
         <option value='acidente'>Acidente</option>
        
     </select>
-    <br> <br>
-    <input type="button" class="alerta" value='Clique aqui para enviar o Alerta com sua localização!' onclick="geolocate()">
-    <hr>
-    <h3>Sua localização:</h3>
-    <form action='/enviar' method="POST">
-        <h4>Latitude Identificada: </h4><input type="text" name="x" id="x"  readonly="readonly" >
-        <h4>Longitude Identificada: </h4><input type="text" name="y" id="y"  readonly="readonly" ><br><br><br>
-        <input type="submit" value="Visualizar todos os Alertas!" style="height: 70px;border:1px solid ; border-radius: 5px; background-color: black; color: white;"><br><br>
-        <!--<input type="submit" value="Enviar dados estando Logado" style="border:1px solid ; border-radius: 5px; background-color: blue; color: white;">-->
-    </form>
+    <br>     <br> <br>
+    <input type="button" class="alerta" value='Enviar Alerta com minha localização!' onclick="geolocate()">
+    <br>     <br> <br>
+    <a>Ou </a><a>Digite outra localização</a>
+   <div class="outra"> <h4>Insira o nome da Rua:</h4>
+    <input class="input_endereco" type="text" id="rua">
+
+    <h4>Insira o número:</h4>
+    <input class="input_endereco" type="text" id="numero">
+    
+    <h4>Insira o nome do Bairro:</h4>
+    <input class="input_endereco" type="text" id="bairro">
+
+    <h4>Insira o Estado:</h4>
+    <select class="input_endereco" id="UF" name="UF">
+        <option value="">Selecione</option>
+        <option value="RJ">Rio de Janeiro</option>
+        <option value="SP">São Paulo</option>
+        <option value="AC">Acre</option>
+        <option value="AL">Alagoas</option>
+        <option value="AP">Amapá</option>
+        <option value="AM">Amazonas</option>
+        <option value="BA">Bahia</option>
+        <option value="CE">Ceará</option>
+        <option value="DF">Distrito Federal</option>
+        <option value="ES">Espirito Santo</option>
+        <option value="GO">Goiás</option>
+        <option value="MA">Maranhão</option>
+        <option value="MS">Mato Grosso do Sul</option>
+        <option value="MT">Mato Grosso</option>
+        <option value="MG">Minas Gerais</option>
+        <option value="PA">Pará</option>
+        <option value="PB">Paraíba</option>
+        <option value="PR">Paraná</option>
+        <option value="PE">Pernambuco</option>
+        <option value="PI">Piauí</option>
+        <option value="RN">Rio Grande do Norte</option>
+        <option value="RS">Rio Grande do Sul</option>
+        <option value="RO">Rondônia</option>
+        <option value="RR">Roraima</option>
+        <option value="SC">Santa Catarina</option>
+        <option value="SE">Sergipe</option>
+        <option value="TO">Tocantins</option>
+    </select>
+    <br>    <br>    <br>
+
+
+    <input type="button" onclick="teste()"  class="alerta" value='Enviar Alerta com esta localização'><br>
+</div>
 
     <br><br><br>
     

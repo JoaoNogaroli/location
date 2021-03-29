@@ -4,6 +4,7 @@ import folium
 import pyrebase
 from cadastro_restaurante import func_cadastrar_restaurante
 from realizar_login import login
+from folium.plugins import HeatMap
 
 config = {
     "apiKey": "AIzaSyAQwcftJBr3l60CLrKkRS1CjbMS6gom-nI",
@@ -29,6 +30,10 @@ def index():
 @app.route("/no_user", methods = ['POST'])   
 def no_user():
     return render_template('no_user.html')
+
+@app.route("/pag_analise", methods = ["POST"])    
+def pag_analise():
+    return render_template("pag_analise.html")
 
 @app.route("/pag_index")
 @app.route("/pag_index" , methods = ['POST'])
@@ -64,17 +69,16 @@ def realizar_login():
 
 @app.route("/enviar", methods=['POST'])
 def visualize():
-    x = request.form['x']
-    y = request.form['y']
+    #x = request.form['x']
+    #y = request.form['y']
     map = folium.Map(
-        location=[x,y],
-        zoom_start=90
+        location=[-22.866482,-43.221083],
+        zoom_start=12
 
     )
     
     snapshots1 = list(db.child("Users").child("DadosGeograficos").get().val())
     for snapshots in snapshots1:
-        
             valor = db.child("Users").child("DadosGeograficos").child(snapshots).get().val()
             #latitude = valor['Latitude']
             #longitude = valor['Longitude']
@@ -113,6 +117,35 @@ def visualize():
             
     
     return map._repr_html_()
+
+@app.route("/graficoincid", methods=['POST'])
+def graficoincid():
+    map = folium.Map(
+        location=[-22.866482,-43.221083],
+        zoom_start=12
+
+    )
+    locais=[]
+    snapshots1 = list(db.child("Users").child("DadosGeograficos").get().val())
+    for snapshots in snapshots1:
+        
+            valor = db.child("Users").child("DadosGeograficos").child(snapshots).get().val()
+            #latitude = valor['Latitude']
+            #longitude = valor['Longitude']
+            for item in valor:
+                try:
+                    aqui = db.child("Users").child("DadosGeograficos").child(snapshots).child(item).get().val()    
+                    #latitude = aqui['Latitude']
+                    #longitude = aqui['Longitude']
+                    coord = [aqui['Latitude'], aqui['Longitude']]
+                    #print(coord)
+                    locais.append(coord)
+                    #alerta = aqui['Alerta'].capitalize()
+                except:
+                    continue
+    HeatMap(locais, radius=30).add_to(map)
+    return map._repr_html_()
+
 
 @app.route("/user_logged")
 def user_logged():

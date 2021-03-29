@@ -22,6 +22,8 @@ function geolocate() {
         var longitude = position.coords.longitude;
         document.getElementById('x').value = latitude;
         document.getElementById('y').value = longitude;
+        document.getElementById('x2').value = latitude;
+        document.getElementById('y2').value = longitude;
         const currentTime = new Date();
         const time = currentTime.getTime();
         var opcao = document.getElementById('opcao').value
@@ -56,3 +58,38 @@ function geolocate() {
     });
 }
 
+var geocoder= new google.maps.Geocoder();
+
+
+function teste(){
+    var rua = document.getElementById("rua").value;
+    var numero = document.getElementById("numero").value;
+    var bairro = document.getElementById("bairro").value;
+    var UF = document.getElementById("UF").value;
+
+   
+    var address = rua+","+numero+","+bairro+","+UF;
+    console.log(address)
+    geocoder.geocode( { 'address': address}, function(results, status) {
+    if (status == google.maps.GeocoderStatus.OK) {
+        console.log("OK")
+        latitude = results[0].geometry.location.lat();
+        longitude = results[0].geometry.location.lng();
+
+        alert("Latitude: "+latitude + " " + "Longitude: "+longitude);
+        const currentTime = new Date();
+        const time = currentTime.getTime();
+        var opcao = document.getElementById('opcao').value
+        data.ref("Users").child("DadosGeograficos").child("UnknownUser").child("Solicitação"+time).set({
+            'Latitude': latitude,
+            'Longitude': longitude,
+            'Alerta': opcao,
+            'Endereco': address,
+            'timestamp': time
+        })
+
+    } else {
+        alert("Não foi possivel obter localização: " + status);
+    }
+    });
+}

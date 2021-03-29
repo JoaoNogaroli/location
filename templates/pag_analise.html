@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/alerta.css">
+
+    <title>Document</title>
+</head>
+<body>
+    <div class="up"><h1>Análise dos Dados</h1></div>
+
+    <hr><h3>Gráfico Pontual:</h3>
+    <form action='/enviar' method="POST">
+        
+        <input type="submit" value="Visualizar todos os Alertas!" style="height: 70px;border:1px solid ; border-radius: 5px; background-color: black; color: white;"><br><br>
+        <!--<input type="submit" value="Enviar dados estando Logado" style="border:1px solid ; border-radius: 5px; background-color: blue; color: white;">-->
+    </form>
+   <h3>Gráfico de Incidência:</h3>
+    <form action='/graficoincid' method="POST">
+       
+        <input type="submit" value="Visualizar incidência!" style="height: 70px;border:1px solid ; border-radius: 5px; background-color: black; color: white;"><br><br>
+        <!--<input type="submit" value="Enviar dados estando Logado" style="border:1px solid ; border-radius: 5px; background-color: blue; color: white;">-->
+    </form>
+
+    <br><br>
+
+</body>
+</html>
