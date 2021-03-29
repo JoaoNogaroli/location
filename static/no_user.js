@@ -20,10 +20,7 @@ function geolocate() {
         console.log("POSIÇÂO");
         var latitude = position.coords.latitude;
         var longitude = position.coords.longitude;
-        document.getElementById('x').value = latitude;
-        document.getElementById('y').value = longitude;
-        document.getElementById('x2').value = latitude;
-        document.getElementById('y2').value = longitude;
+        
         const currentTime = new Date();
         const time = currentTime.getTime();
         var opcao = document.getElementById('opcao').value
@@ -34,7 +31,17 @@ function geolocate() {
             'Alerta': opcao,
             'timestamp': time
         })
-        data.ref("Users").child("DadosGeograficos").on('value', function(snapshot){
+        document.getElementById("enviado").innerHTML= "Alerta Enviado com Sucesso!";
+        var div_enviado = document.getElementById("div_enviado");
+        var botao = document.createElement('button');
+        botao.innerHTML ="CLique aqui para voltar";
+        botao.className='botao_voltar';
+        botao.onclick=function(){
+            window.location.replace('/');
+
+        }
+        div_enviado.appendChild(botao)
+        /*data.ref("Users").child("DadosGeograficos").on('value', function(snapshot){
             snapshot.forEach(function(data){
                 console.log(data.val())
                 data.forEach(function(snapshot){
@@ -43,7 +50,7 @@ function geolocate() {
 
                 }) 
             })
-        })
+        })*/
 
 
     }
@@ -87,7 +94,16 @@ function teste(){
             'Endereco': address,
             'timestamp': time
         })
+        document.getElementById("enviado_dois").innerHTML= "Alerta Enviado com Sucesso!";
+        var div_enviado = document.getElementById("div_enviado_dois");
+        var botao = document.createElement('button');
+        botao.innerHTML ="CLique aqui para voltar";
+        botao.className='botao_voltar';
+        botao.onclick=function(){
+            window.location.replace('/');
 
+        }
+        div_enviado.appendChild(botao)
     } else {
         alert("Não foi possivel obter localização: " + status);
     }
